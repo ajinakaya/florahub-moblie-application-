@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "574987989064",
+    "project_id": "florahub-3466f",
+    "storage_bucket": "florahub-3466f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:574987989064:android:ae83a6b436935f7a0a287d",
+        "android_client_info": {
+          "package_name": "com.example.florhub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyeChgLP_rA3uu79HxDWnKAklN6BvQBH0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
