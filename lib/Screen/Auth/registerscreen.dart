@@ -49,13 +49,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
             email: _emailController.text,
             password: _passwordController.text,
             username: _usernameController.text,
-            fullname: _fullnameController.text),
+            name: _fullnameController.text),
       );
 
       NotificationService.display(
         title: "Welcome to this app",
         body:
-            "Hello ${_authViewModel.loggedInUser?.fullname},\n Thank you for registering in this application.",
+            "Hello ${_authViewModel.loggedInUser?.name},\n Thank you for registering in this application.",
       );
 
       Navigator.of(context).pushReplacementNamed("/dashboard");

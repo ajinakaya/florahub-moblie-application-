@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
         NotificationService.display(
           title: "Welcome back",
           body:
-          "Hello ${_authViewModel.loggedInUser?.fullname},\n Hope you are having a wonderful day.",
+          "Hello ${_authViewModel.loggedInUser?.name},\n Hope you are having a wonderful day.",
         );
         Navigator.of(context).pushReplacementNamed('/dashboard');
       }).catchError((e) {
@@ -78,8 +78,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 8),
+
                   const Text("Email",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17,)),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20,left: 15),
+                  ),
                   const SizedBox(
                     height: 10,
                   ),
@@ -174,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Are you new? Create an account ",
+                        "Don't have an account? ",
                         style: TextStyle(color: Colors.grey.shade800),
                       ),
                       InkWell(
@@ -213,3 +217,4 @@ class ValidateLogin {
     return null;
   }
 }
+

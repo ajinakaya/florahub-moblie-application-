@@ -5,7 +5,7 @@ import 'package:florhub/Screen/Auth/forgetscreen.dart';
 import 'package:florhub/Screen/Auth/loginscreen.dart';
 import 'package:florhub/Screen/Auth/registerscreen.dart';
 // import 'package:ecommerce/screens/category/single_category_screen.dart';
-// import 'package:ecommerce/screens/dashboard/dashboard.dart';
+import 'package:florhub/Screen/dashboard/dashboard.dart';
 // import 'package:ecommerce/screens/product/add_product_screen.dart';
 // import 'package:ecommerce/screens/product/edit_product_screen.dart';
 // import 'package:ecommerce/screens/product/my_product_screen.dart';
@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
               "/register": (BuildContext context) => RegisterScreen(),
               // "/forget-password": (BuildContext context) =>
               //     ForgetPasswordScreen(),
-              // "/dashboard": (BuildContext context) => DashboardScreen(),
+              "/dashboard": (BuildContext context) => Dashboard(),
               // "/add-product": (BuildContext context) => AddProductScreen(),
               // "/edit-product": (BuildContext context) => EditProductScreen(),
               // "/single-product": (BuildContext context) =>

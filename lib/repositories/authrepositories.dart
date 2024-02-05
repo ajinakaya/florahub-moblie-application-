@@ -24,7 +24,7 @@ class AuthRepository {
           email: user.email!, password: user.password!);
 
       user.userId = uc.user!.uid;
-
+      user.fcm = "";
       // insert into firestore user table
       await userRef.doc(uc.user!.uid).set(user);
       return uc;

@@ -6,7 +6,7 @@ import 'package:florhub/models/usermodel.dart';
 import 'package:florhub/repositories/authrepositories.dart';
 import 'package:florhub/services/firebase_service.dart';
 import 'package:florhub/viewmodels/global_ui_viewmodel.dart';
-
+//
 // import '../models/favorite_model.dart';
 // import '../repositories/favorite_repositories.dart';
 // import '../repositories/product_repositories.dart';
@@ -93,7 +93,7 @@ class AuthViewModel with ChangeNotifier {
 //   Future<void> getFavoritesUser() async {
 //     try {
 //       var response =
-//           await _favoriteRepository.getFavoritesUser(loggedInUser!.userId!);
+//       await _favoriteRepository.getFavoritesUser(loggedInUser!.userId!);
 //       _favorites = [];
 //       for (var element in response) {
 //         _favorites.add(element.data());
@@ -135,7 +135,7 @@ class AuthViewModel with ChangeNotifier {
 //   Future<void> getMyProducts() async {
 //     try {
 //       var productResponse =
-//           await ProductRepository().getMyProducts(loggedInUser!.userId!);
+//       await ProductRepository().getMyProducts(loggedInUser!.userId!);
 //       _myProduct = [];
 //       for (var element in productResponse) {
 //         _myProduct!.add(element.data());

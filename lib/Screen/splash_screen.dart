@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
       }else{
         NotificationService.display(
           title: "Welcome back",
-          body: "Hello ${_authViewModel.loggedInUser?.fullname},\n We have been waiting for you.",
+          body: "Hello ${_authViewModel.loggedInUser?.name},\n We have been waiting for you.",
         );
         Navigator.of(context).pushReplacementNamed("/dashboard");
       }

@@ -1,63 +1,69 @@
+
 import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 UserModel? userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
+
 String userModelToJson(UserModel? data) => json.encode(data!.toJson());
 
 class UserModel {
-  String? id;
-  String? fullname;
-  String? userId;
-  String? profilePic;
-  String? email;
-  String? password;
-  String? username;
-  String? fcm;
-
-
-
   UserModel({
     this.id,
-    this.fullname,
     this.userId,
-    this.profilePic,
-    this. email,
-    this.password,
+    this.name,
     this.username,
+    // this.imageUrl,
+    // this.imagePath,
     this.fcm,
-
+    this.email,
+    this.password,
   });
+
+  String? id;
+  String? userId;
+  String? name;
+  String? username;
+  String? phone;
+  // String? imageUrl;
+  // String? imagePath;
+  String? fcm;
+  String? email;
+  String? password;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
     id: json["id"],
     userId: json["user_id"],
-    fullname: json["fullname"],
+    name: json["name"],
     username: json["username"],
-    profilePic: json["profilePic"],
+    // imageUrl: json["imageUrl"],
+    // imagePath: json["imagePath"],
+    fcm: json["fcm"],
     email: json["email"],
     password: json["password"],
-    fcm: json["fcm"],
-
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "user_id": userId,
-    "name": fullname,
+    "name": name,
     "username": username,
-    "profilePic": profilePic,
+    // "imageUrl": imageUrl,
+    // "imagePath": imagePath,
+    "fcm": fcm,
     "email": email,
     "password": password,
-    "fcm": fcm,
   };
   factory UserModel.fromFirebaseSnapshot(DocumentSnapshot<Map<String, dynamic>> json) => UserModel(
     id: json.id,
     userId: json["user_id"],
-    fullname: json["fullname"],
+    name: json["name"],
     username: json["username"],
-    profilePic: json["profilePic"],
+    // imageUrl: json["imageUrl"],
+    // imagePath: json["imagePath"],
+    fcm: json["fcm"],
     email: json["email"],
     password: json["password"],
-    fcm: json["fcm"],
   );
 
 }
