@@ -111,13 +111,18 @@ class _AccountScreenState extends State<AccountScreen> {
                     width: 150,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: const Color.fromARGB(168, 0, 0, 0),
+                      image: _image == null
+                          ? DecorationImage(
+                        image: AssetImage('assets/logo2.png'),
+                        fit: BoxFit.cover,
+                      )
+                          : null,
                     ),
                     child: _image == null
                         ? IconButton(
                       icon: Icon(
-                        Icons.camera,
-                        color: Colors.red,
+                        Icons.add,
+                        color: Colors.black,
                         size: 40,
                       ),
                       onPressed: _pickImage,

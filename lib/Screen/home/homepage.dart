@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
           appBar: AppBar(
             backgroundColor: Colors.white,
             title: const Text(
-              "Florhub",
+              "FloraHub",
               style: TextStyle(color: Colors.black),
             ),
           ),
@@ -211,10 +211,18 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget buildProductCards() {
-    return Column(
-      children: _categoryViewModel.products.map((product) {
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 0.7, // Adjust the aspect ratio to control the card size
+      ),
+      itemCount: _categoryViewModel.products.length,
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemBuilder: (context, index) {
+        final product = _categoryViewModel.products[index];
         return ProductCard(product);
-      }).toList(),
+      },
     );
   }
 

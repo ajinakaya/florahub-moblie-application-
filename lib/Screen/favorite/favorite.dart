@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:florhub/viewmodels/auth_viewmodel.dart';
 import 'package:provider/provider.dart';
 import '../../models/favoritemodel.dart';
+import '../../viewmodels/auth_viewmodel.dart';
 import '../../viewmodels/global_ui_viewmodel.dart';
 
 class FavoriteScreen extends StatefulWidget {
@@ -16,8 +15,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   late GlobalUIViewModel _ui;
   late AuthViewModel _authViewModel;
   String? productId;
-
-
 
   @override
   void initState() {
@@ -48,61 +45,80 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     }
     _ui.loadState(false);
   }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthViewModel>(builder: (context, authVM, child) {
-      return Container(
-        child: RefreshIndicator(
-          onRefresh: getInit,
-          child: SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
-            child:
-            authVM.favoriteProduct == null ?
-            Column(
-              children: [
-                Center(child: Text("Something went wrong")),
-              ],
-            ) :
-            authVM.favoriteProduct!.length == 0
-                ? Column(
-              children: [
-                Center(child: Text("Please add to favorite")),
-              ],
-            )
-                : Column(children: [
-              SizedBox(height: 10,),
-              ...authVM.favoriteProduct!.map(
-                    (e) => InkWell(
-                  onTap: (){
-                    Navigator.of(context).pushNamed("/single-product", arguments: e.id!);
-                  },
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    child: Card(
-                      child: ListTile(
-                        trailing: IconButton(
-                          iconSize: 25,
-                          onPressed: (){
-                            removeFavorite(_authViewModel.favorites.firstWhere((element) => element.productId == e.id), e.id!);
-                          },
-                          icon: Icon(Icons.delete_outlined, color: Colors.red,),
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text(
+            "Favorite",
+            style: TextStyle(color: Colors.black),
+          ),
+          centerTitle: true,
+          iconTheme: IconThemeData(color: Colors.black),
+        ),
+        body: Container(
+          child: RefreshIndicator(
+            onRefresh: getInit,
+            child: SingleChildScrollView(
+              physics: AlwaysScrollableScrollPhysics(),
+              child: authVM.favoriteProduct == null
+                  ? Column(
+                children: [
+                  Center(child: Text("Something went wrong")),
+                ],
+              )
+                  : authVM.favoriteProduct!.length == 0
+                  ? Column(
+                children: [
+                  Center(child: Text("Please add to favorite")),
+                ],
+              )
+                  : Column(
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ...authVM.favoriteProduct!.map(
+                        (e) => InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed("/single-product", arguments: e.id!);
+                      },
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        child: Card(
+                          child: ListTile(
+                            trailing: IconButton(
+                              iconSize: 25,
+                              onPressed: () {
+                                removeFavorite(
+                                    _authViewModel.favorites.firstWhere(
+                                            (element) => element.productId == e.id),
+                                    e.id!);
+                              },
+                              icon: Icon(Icons.delete_outlined, color: Colors.red),
+                            ),
+                            leading: ClipRRect(
+                              borderRadius: BorderRadius.circular(5),
+                              child: Image.network(
+                                e.imageUrl.toString(),
+                                width: 100,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            title: Text(e.title.toString()),
+                            subtitle: Text(e.price.toString()),
+                          ),
                         ),
-                        leading: ClipRRect(
-                            borderRadius: BorderRadius.circular(5),
-                            child: Image.network(
-                              e.imageUrl.toString(),
-                              width: 100,
-                              fit: BoxFit.cover,
-
-                            )),
-                        title: Text(e.title.toString()),
-                        subtitle: Text(e.price.toString()),
                       ),
                     ),
                   ),
-                ),
-              )
-            ]),
+                ],
+              ),
+            ),
           ),
         ),
       );

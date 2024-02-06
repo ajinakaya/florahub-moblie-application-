@@ -79,14 +79,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 8),
 
-                  const Text("Email",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20,left: 15),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Email",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                ),
+
+                const SizedBox(
+                  height: 10,
+                ),
+
                   CommonTextField(
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
@@ -193,11 +197,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ],
               ),
-            ),
+            ],
           ),
         ),
       ),
+    )
+      )
     );
+
   }
 }
 

@@ -35,6 +35,9 @@ class _EditProductBodyState extends State<EditProductBody> {
   TextEditingController _productNameController = TextEditingController();
   TextEditingController _productPriceController = TextEditingController();
   TextEditingController _productDescriptionController = TextEditingController();
+  TextEditingController _heightController = TextEditingController();
+  TextEditingController _temperatureController = TextEditingController();
+  TextEditingController _potController = TextEditingController();
   String productCategory = "";
 
   late GlobalUIViewModel _ui;
@@ -70,6 +73,9 @@ class _EditProductBodyState extends State<EditProductBody> {
         title: _productNameController.text,
         price: num.parse(_productPriceController.text.toString()),
         userId: _authViewModel.loggedInUser!.userId,
+        height:_heightController.text,
+        temperature:_temperatureController.text,
+        pot:_potController.text,
       );
       await _authViewModel.editMyProduct(data, productId!);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Success")));
@@ -92,6 +98,10 @@ class _EditProductBodyState extends State<EditProductBody> {
         _productNameController.text = product.title ?? "";
         _productPriceController.text = product.price==null ? "" : product.price.toString();
         _productDescriptionController.text = product.description ?? "";
+        _temperatureController.text = product.temperature?? "";
+        _heightController.text = product.height ?? "";
+        _potController.text = product.pot ?? "";
+
         setState(() {
           selectedCategory = product.categoryId;
           imageUrl = product.imageUrl;
@@ -158,8 +168,14 @@ class _EditProductBodyState extends State<EditProductBody> {
             return Text("Error");
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors.black54,
-              title: Text("Edit a product"),
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              title: Text(
+                "Edit",
+                style: TextStyle(color: Colors.black),
+              ),
+              centerTitle: true,
+              iconTheme: IconThemeData(color: Colors.black),
             ),
             body: Consumer<CategoryViewModel>(builder: (context, categoryVM, child) {
               return SafeArea(
@@ -219,27 +235,77 @@ class _EditProductBodyState extends State<EditProductBody> {
                         SizedBox(
                           height: 15,
                         ),
-                        Text(
-                          "Category",
-                          textAlign: TextAlign.start,
+                        TextFormField(
+                          controller: _heightController,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)
+                            ),
+                            border: InputBorder.none,
+                            label: Text("height"),
+                            hintText: 'height',
+                          ),
                         ),
-                        SizedBox(
-                          height: 5,
+                        SizedBox(height: 10,),
+
+                        TextFormField(
+                          controller: _temperatureController,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)
+                            ),
+                            border: InputBorder.none,
+                            label: Text("temperature"),
+                            hintText: 'temperature',
+                          ),
                         ),
+                        SizedBox(height: 10,),
+
+                        TextFormField(
+                          controller: _potController,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)
+                            ),
+                            border: InputBorder.none,
+                            label: Text("pot"),
+                            hintText: 'pot',
+                          ),
+                        ),
+                        SizedBox(height: 10,),
+
                         DropdownButtonFormField(
-                          borderRadius: BorderRadius.circular(10),
                           isExpanded: true,
                           value: selectedCategory,
-                          decoration: const InputDecoration(
+                          decoration:  InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)
+                            ),
                             border: InputBorder.none,
+                            hintText: 'Category',
                             filled: true,
                           ),
                           icon: const Icon(Icons.arrow_drop_down_outlined),
-                          items: categoryVM.categoryNames.map((categoryName) {
+                          items: categoryVM.categoryNames.map((pt) {
                             return DropdownMenuItem(
-                              value: categoryName,
+                              value: _categoryViewModel.getCategoryIdByIndex(categoryVM.categoryNames.indexOf(pt)),
                               child: Text(
-                                categoryName,
+                                pt,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             );
@@ -320,22 +386,7 @@ class _EditProductBodyState extends State<EditProductBody> {
                         SizedBox(
                           height: 10,
                         ),
-                        Container(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: BorderSide(color: Colors.orange))),
-                                padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.symmetric(vertical: 10)),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Text(
-                                "Back",
-                                style: TextStyle(fontSize: 20),
-                              )),
-                        ),
+
                       ],
                     ),
                   ),

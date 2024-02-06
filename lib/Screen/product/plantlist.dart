@@ -38,18 +38,32 @@ class _MyProductScreenState extends State<MyProductScreen> {
   Widget build(BuildContext context) {
     return Consumer<AuthViewModel>(builder: (context, authVM, child) {
       return Scaffold(
-        floatingActionButton: FloatingActionButton.extended(
-          label: Text("Add Product"),
-          icon: Icon(Icons.add),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.lightGreen,
           onPressed: () {
             Navigator.of(context).pushNamed("/addproduct");
             getInit();
           },
+          child: CircleAvatar(
+            backgroundColor: Colors.lightGreen,
+            radius: 18,
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+          ),
         ),
         appBar: AppBar(
-          backgroundColor: Colors.black54,
-          title: Text("My Products"),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text(
+            "My Products",
+            style: TextStyle(color: Colors.black),
+          ),
+          centerTitle: true,
+          iconTheme: IconThemeData(color: Colors.black),
         ),
+
         body: RefreshIndicator(
           onRefresh: getInit,
           child: SingleChildScrollView(
@@ -71,6 +85,7 @@ class _MyProductScreenState extends State<MyProductScreen> {
       onTap: () {
         Navigator.of(context).pushNamed("/single-product", arguments: e.id);
       },
+
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
         child: Card(

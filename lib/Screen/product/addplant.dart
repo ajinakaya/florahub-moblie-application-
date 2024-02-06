@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:florhub/models/plantmodel.dart';
-import 'package:florhub/models/category.dart';
 import 'package:florhub/services/file_upload.dart';
 import 'package:florhub/viewmodels/categoryviewmodel.dart';
 import 'package:provider/provider.dart';
@@ -123,8 +122,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black54,
-        title: Text("Add a product"),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(
+          "Post",
+          style: TextStyle(color: Colors.black),
+        ),
+        centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.black),
       ),
       body: Consumer<CategoryViewModel>(
           builder: (context, categoryVM, child) {
@@ -141,7 +146,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
                       TextFormField(
                         controller: _NameController,
-                        // validator: ValidateProduct.username,
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
@@ -151,14 +155,30 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               borderRadius: BorderRadius.circular(20)
                           ),
                           border: InputBorder.none,
-                          label: Text("Product Name"),
-                          hintText: 'Enter product name',
+                          label: Text("Title"),
+                          hintText: 'Title',
                         ),
                       ),
                       SizedBox(height: 10,),
                       TextFormField(
+                        controller: _DescriptionController,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: 4,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20)
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20)
+                          ),
+                          border: InputBorder.none,
+                          label: Text("Description"),
+                          hintText: 'Description',
+                        ),
+                      ),
+                      SizedBox(height: 15,),
+                      TextFormField(
                         controller: _priceController,
-                        // validator: ValidateProduct.username,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
@@ -168,29 +188,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               borderRadius: BorderRadius.circular(20)
                           ),
                           border: InputBorder.none,
-                          label: Text("Product Price"),
-                          hintText: 'Enter product price',
+                          label: Text("Price"),
+                          hintText: 'Price',
                         ),
                       ),
-                      SizedBox(height: 10,),
-                      TextFormField(
-                        controller: _DescriptionController,
-
-                        keyboardType: TextInputType.multiline,
-                        maxLines: 5,
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)
-                          ),
-                          border: InputBorder.none,
-                          label: Text("Product Description"),
-                          hintText: 'Enter product description',
-                        ),
-                      ),
-                      SizedBox(height: 15,),
+                      SizedBox(height: 10),
                       TextFormField(
                         controller: _heightController,
                         keyboardType: TextInputType.multiline,
@@ -242,14 +244,19 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       ),
                       SizedBox(height: 10,),
 
-                      Text("Category", textAlign: TextAlign.start,),
-                      SizedBox(height: 5,),
                       DropdownButtonFormField(
-                        borderRadius: BorderRadius.circular(10),
                         isExpanded: true,
                         value: selectedplantCategory,
-                        decoration: const InputDecoration(
+
+                        decoration:  InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20)
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20)
+                          ),
                           border: InputBorder.none,
+                          hintText: 'Category',
                           filled: true,
                         ),
                         icon: const Icon(Icons.arrow_drop_down_outlined),
