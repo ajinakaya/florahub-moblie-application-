@@ -1,5 +1,6 @@
 
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -11,7 +12,7 @@ class plantModel {
   plantModel({
     this.id,
     this.userId,
-    this.plantId,
+    this.categoryId,
     this.pot,
     this.title,
     this.price,
@@ -19,25 +20,27 @@ class plantModel {
     this.imageUrl,
     this.description,
     this.temperature,
+    this.imagePath,
 
   });
 
   String? id;
   String? userId;
-  String? plantId;
+  String? categoryId;
   String? pot;
   String? title;
-  String? price;
+  num? price;
   String? height;
   String? temperature;
   String? description;
   String? imageUrl;
+  String? imagePath;
 
 
   factory plantModel.fromJson(Map<String, dynamic> json) => plantModel(
     id: json["id"],
     userId: json["user_id"],
-    plantId: json["plantId"],
+    categoryId: json["category_id"],
     pot: json["pot"],
     title: json["title"],
     height: json["height"],
@@ -45,6 +48,7 @@ class plantModel {
     price: json["price"].toDouble(),
     description: json["description"],
     imageUrl: json["imageUrl"],
+    imagePath: json["imagePath"],
   );
 
 
@@ -52,7 +56,7 @@ class plantModel {
   factory plantModel.fromFirebaseSnapshot(DocumentSnapshot<Map<String, dynamic>> json) => plantModel(
     id: json.id,
     userId: json["user_id"],
-    plantId: json["plantId"],
+    categoryId: json["category_id"],
     pot: json["pot"],
     title: json["title"],
     height: json["height"],
@@ -60,13 +64,14 @@ class plantModel {
     price: json["price"].toDouble(),
     description: json["description"],
     imageUrl: json["imageUrl"],
+    imagePath: json["imagePath"],
   );
 
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "user_id": userId,
-    "plantId": plantId,
+    "category_id": categoryId,
     "title": title,
     "pot": pot,
     "price": price,
@@ -74,5 +79,6 @@ class plantModel {
     "temperature": temperature,
     "imageUrl": imageUrl,
     "height": height,
+    "imagePath": imagePath,
   };
 }

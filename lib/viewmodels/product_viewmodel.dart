@@ -1,11 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
 import 'package:florhub/models/plantmodel.dart';
-
-
-
 import '../repositories/plantrepositories.dart';
 
 class ProductViewModel with ChangeNotifier {
@@ -13,30 +7,47 @@ class ProductViewModel with ChangeNotifier {
   List<plantModel> _products = [];
   List<plantModel> get products => _products;
 
-  Future<void> getProducts() async{
-    _products=[];
+  List<plantModel> _categoryProducts = [];
+  List<plantModel> get categoryProducts => _categoryProducts;
+
+  Future<void> getProducts() async {
+    _products = [];
     notifyListeners();
-    try{
+    try {
       var response = await _productRepository.getAllProducts();
       for (var element in response) {
         print(element.id);
         _products.add(element.data());
       }
       notifyListeners();
-    }catch(e){
+    } catch (e) {
       print(e);
       _products = [];
       notifyListeners();
     }
   }
 
-
-  Future<void> addProduct(plantModel product) async{
-    try{
+  Future<void> addProduct(plantModel product) async {
+    try {
       var response = await _productRepository.addProducts(product: product);
-    }catch(e){
+    } catch (e) {
       notifyListeners();
     }
   }
 
+  Future<void> getProductsByCategory(String categoryId) async {
+    _categoryProducts = [];
+    notifyListeners();
+    try {
+      var response = await _productRepository.getProductByCategory(categoryId);
+      for (var element in response) {
+        _categoryProducts.add(element.data());
+      }
+      notifyListeners();
+    } catch (e) {
+      print(e);
+      _categoryProducts = [];
+      notifyListeners();
+    }
+  }
 }

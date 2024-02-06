@@ -4,18 +4,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:florhub/Screen/Auth/forgetscreen.dart';
 import 'package:florhub/Screen/Auth/loginscreen.dart';
 import 'package:florhub/Screen/Auth/registerscreen.dart';
-// import 'package:ecommerce/screens/category/single_category_screen.dart';
 import 'package:florhub/Screen/dashboard/dashboard.dart';
-// import 'package:ecommerce/screens/product/add_product_screen.dart';
-// import 'package:ecommerce/screens/product/edit_product_screen.dart';
-// import 'package:ecommerce/screens/product/my_product_screen.dart';
-// import 'package:ecommerce/screens/product/single_product_screen.dart';
+import 'package:florhub/Screen/product/addplant.dart';
+import 'package:florhub/Screen/product/editproduct.dart';
+import 'package:florhub/Screen/product/plantlist.dart';
+import 'package:florhub/Screen/product/plantdetails.dart';
 import 'package:florhub/Screen/splash_screen.dart';
 import 'package:florhub/services/localnotification.dart';
 import 'package:florhub/viewmodels/auth_viewmodel.dart';
-// import 'package:ecommerce/viewmodels/category_viewmodel.dart';
+import 'package:florhub/viewmodels/categoryviewmodel.dart';
 import 'package:florhub/viewmodels/global_ui_viewmodel.dart';
-// import 'package:ecommerce/viewmodels/product_viewmodel.dart';
+import 'package:florhub/viewmodels/product_viewmodel.dart';
 import 'package:overlay_kit/overlay_kit.dart';
 import 'package:provider/provider.dart';
 
@@ -40,29 +39,17 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => GlobalUIViewModel()),
         ChangeNotifierProvider(create: (_) => AuthViewModel()),
-        // ChangeNotifierProvider(create: (_) => CategoryViewModel()),
-        // ChangeNotifierProvider(create: (_) => ProductViewModel()),
+         ChangeNotifierProvider(create: (_) => CategoryViewModel()),
+        ChangeNotifierProvider(create: (_) => ProductViewModel()),
       ],
       child: OverlayKit(
         child: Consumer<GlobalUIViewModel>(builder: (context, loader, child) {
-          // if (loader.isLoading) {
-          //   OverlayLoadingProgress.start();
-          // } else {
-          //   OverlayLoadingProgress.stop();
-          // }
+
           return MaterialApp(
             title: 'flora hub',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-              // This is the theme of your application.
-              //
-              // Try running your application with "flutter run". You'll see the
-              // application has a blue toolbar. Then, without quitting the app, try
-              // changing the primarySwatch below to Colors.green and then invoke
-              // "hot reload" (press "r" in the console where you ran "flutter run",
-              // or simply save your changes to "hot reload" in a Flutter IDE).
-              // Notice that the counter didn't reset back to zero; the application
-              // is not restarted.
+
               fontFamily: "Poppins",
               primarySwatch: Colors.blue,
               textTheme: GoogleFonts.aBeeZeeTextTheme(),
@@ -74,14 +61,14 @@ class MyApp extends StatelessWidget {
               "/register": (BuildContext context) => RegisterScreen(),
               // "/forget-password": (BuildContext context) =>
               //     ForgetPasswordScreen(),
-              "/dashboard": (BuildContext context) => Dashboard(),
-              // "/add-product": (BuildContext context) => AddProductScreen(),
-              // "/edit-product": (BuildContext context) => EditProductScreen(),
-              // "/single-product": (BuildContext context) =>
-              //     SingleProductScreen(),
+              "/dashboard": (BuildContext context) => DashboardScreen(),
+              "/addproduct": (BuildContext context) => AddProductScreen(),
+              "/edit-product": (BuildContext context) => EditProductScreen(),
+              "/single-product": (BuildContext context) =>
+                  plantdetailsScreen(),
               // "/single-category": (BuildContext context) =>
-              //     SingleCategoryScreen(),
-              // "/my-products": (BuildContext context) => MyProductScreen(),
+              //     CategoryProductsScreen(),
+              "/my-products": (BuildContext context) => MyProductScreen(),
             },
           );
         }),

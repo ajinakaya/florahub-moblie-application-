@@ -53,7 +53,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       );
 
       NotificationService.display(
-        title: "Welcome to this app",
+        title: "Welcome to florhub",
         body:
             "Hello ${_authViewModel.loggedInUser?.name},\n Thank you for registering in this application.",
       );
