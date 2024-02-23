@@ -67,7 +67,7 @@ class _CartScreenState extends State<CartScreen> {
           elevation: 0,
           title: Text(
             "shoppingcart",
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.black,fontSize: 25,fontWeight: FontWeight.bold ),
           ),
           centerTitle: true,
           iconTheme: IconThemeData(color: Colors.black),
@@ -92,7 +92,7 @@ class _CartScreenState extends State<CartScreen> {
                   : Column(
                 children: [
                   SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   Container(
                     margin: EdgeInsets.all(10),
@@ -124,6 +124,10 @@ class _CartScreenState extends State<CartScreen> {
                       child: Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+
+                          ),
                           child: ListTile(
                             trailing: IconButton(
                               iconSize: 25,

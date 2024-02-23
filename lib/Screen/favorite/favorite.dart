@@ -55,7 +55,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           elevation: 0,
           title: Text(
             "Favorite",
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.black,fontSize: 25,fontWeight: FontWeight.bold ),
           ),
           centerTitle: true,
           iconTheme: IconThemeData(color: Colors.black),
@@ -80,7 +80,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   : Column(
                 children: [
                   SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   ...authVM.favoriteProduct!.map(
                         (e) => InkWell(
@@ -90,6 +90,10 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                       child: Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+
+                          ),
                           child: ListTile(
                             trailing: IconButton(
                               iconSize: 25,
@@ -102,7 +106,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                               icon: Icon(Icons.delete_outlined, color: Colors.red),
                             ),
                             leading: ClipRRect(
-                              borderRadius: BorderRadius.circular(5),
+                              borderRadius: BorderRadius.circular(15.0),
                               child: Image.network(
                                 e.imageUrl.toString(),
                                 width: 100,

@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void checkLogin() async{
     String? token = await FirebaseMessaging.instance.getToken();
 
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     // check for user detail first
     try{
       await _authViewModel.checkLogin(token);

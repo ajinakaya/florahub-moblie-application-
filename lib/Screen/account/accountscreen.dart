@@ -93,7 +93,7 @@ class _AccountScreenState extends State<AccountScreen> {
       child: Column(
         children: [
           SizedBox(
-            height: 10,
+            height: 15,
           ),
           ClipRRect(
             borderRadius: BorderRadius.circular(100),
@@ -113,7 +113,7 @@ class _AccountScreenState extends State<AccountScreen> {
                       shape: BoxShape.circle,
                       image: _image == null
                           ? DecorationImage(
-                        image: AssetImage('assets/logo2.png'),
+                        image: AssetImage('assets/icon/users.jpg'),
                         fit: BoxFit.cover,
                       )
                           : null,
@@ -122,7 +122,7 @@ class _AccountScreenState extends State<AccountScreen> {
                         ? IconButton(
                       icon: Icon(
                         Icons.add,
-                        color: Colors.black,
+                        color: Colors.grey,
                         size: 40,
                       ),
                       onPressed: _pickImage,
@@ -133,13 +133,13 @@ class _AccountScreenState extends State<AccountScreen> {
             ),
           ),
           SizedBox(
-            height: 10,
+            height: 20,
           ),
           Container(
             child: Text(_auth.loggedInUser!.email.toString()),
           ),
           SizedBox(
-            height: 10,
+            height: 25,
           ),
           makeSettings(
             icon: Icon(Icons.sell),
@@ -148,6 +148,9 @@ class _AccountScreenState extends State<AccountScreen> {
             onTap: () {
               Navigator.of(context).pushNamed("/my-products");
             },
+          ),
+          SizedBox(
+            height: 10,
           ),
           makeSettings(
             icon: Icon(Icons.logout),

@@ -23,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _authViewModel = Provider.of<AuthViewModel>(context, listen: false);
       _categoryViewModel = Provider.of<CategoryViewModel>(context, listen: false);
@@ -81,6 +82,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
+          backgroundColor: Colors.grey[100],
+
         );
       },
     );
@@ -108,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   offset: const Offset(0, 0),
                 ),
               ],
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(13.0),
             ),
             child: Row(
               children: [
@@ -175,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
             final categoryName = entry.value;
 
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 19.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: GestureDetector(
                 onTap: () {
                   setState(() {
@@ -210,19 +213,23 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+
   Widget buildProductCards() {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 0.7, // Adjust the aspect ratio to control the card size
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 0.7,
+        ),
+        itemCount: _categoryViewModel.products.length,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) {
+          final product = _categoryViewModel.products[index];
+          return ProductCard(product);
+        },
       ),
-      itemCount: _categoryViewModel.products.length,
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) {
-        final product = _categoryViewModel.products[index];
-        return ProductCard(product);
-      },
     );
   }
 
@@ -235,36 +242,45 @@ class _HomeScreenState extends State<HomeScreen> {
         width: 250,
         child: Card(
           elevation: 5,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(23.0),
+          ),
           child: Stack(
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(23.0),
                 child: Image.network(
                   e.imageUrl.toString(),
-                  height: 300,
+                  height: 200,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
               ),
+
               Positioned.fill(
                 child: Align(
                   alignment: Alignment.bottomCenter,
+
                   child: Container(
                     width: double.infinity,
+
                     padding: EdgeInsets.symmetric(vertical: 5),
-                    decoration: BoxDecoration(color: Colors.white.withOpacity(0.8)),
+                    decoration: BoxDecoration(color: Colors.white.withOpacity(0.8),
+                      borderRadius: BorderRadius.circular(23.0),
+                    ),
+
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
                           e.title.toString(),
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
                           maxLines: 2,
                         ),
                         Text(
                           "Rs. " + e.price.toString(),
-                          style: TextStyle(fontSize: 15, color: Colors.green),
+                          style: TextStyle(fontSize: 13 , color: Colors.black),
                           textAlign: TextAlign.center,
                           maxLines: 2,
                         ),

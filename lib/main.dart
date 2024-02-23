@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
               "/addproduct": (BuildContext context) => AddProductScreen(),
               "/edit-product": (BuildContext context) => EditProductScreen(),
               "/single-product": (BuildContext context) =>
-                  plantdetailsScreen(),
+                  PlantDetailsScreen(),
               // "/single-category": (BuildContext context) =>
               //     CategoryProductsScreen(),
               "/my-products": (BuildContext context) => MyProductScreen(),

@@ -8,14 +8,14 @@ import '../../repositories/cartrepositories.dart';
 import '../../viewmodels/global_ui_viewmodel.dart';
 import '../../viewmodels/plantdetail_viewmodel.dart';
 
-class plantdetailsScreen extends StatefulWidget {
-  const plantdetailsScreen({Key? key}) : super(key: key);
+class PlantDetailsScreen extends StatefulWidget {
+  const PlantDetailsScreen({Key? key}) : super(key: key);
 
   @override
-  State<plantdetailsScreen> createState() => _plantdetailsScreenState();
+  State<PlantDetailsScreen> createState() => _plantdetailsScreenState();
 }
 
-class _plantdetailsScreenState extends State<plantdetailsScreen> {
+class _plantdetailsScreenState extends State<PlantDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SingleProductViewModel>(
@@ -94,90 +94,158 @@ class _SingleProductBodyState extends State<SingleProductBody> {
           )
               : Scaffold(
             floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: Container(
-              height: 70,
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border(
-                  top: BorderSide(width: 1, color: Colors.black12),
+            floatingActionButton: Stack(
+              children: [
+                Container(
+                  height: 240,
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: Colors.blueGrey,
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(45)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 10,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              child: Row(
-                children: [
 
-                  Expanded(
-                      child:
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                if (quantity > 1) {
-                                  quantity -= 1;
-                                }
-                              });
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Color(0xFFE6F0F5),
-                                  borderRadius: BorderRadius.circular(50)),
-                              padding: EdgeInsets.all(5),
-                              child: Icon(
-                                Icons.remove,
-                                size: 15,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            child: Text(quantity.toString()),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                quantity += 1;
-                              });
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Color(0xFFE6F0F5),
-                                  borderRadius: BorderRadius.circular(50)),
-                              padding: EdgeInsets.all(5),
-                              child: Icon(
-                                Icons.add,
-                                size: 15,
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
+                Positioned(
+                  bottom: 130,
+                  left: 35,
+                  child: Column(
+                    children: [
+
+                      Image.asset(
+                        'assets/icon/temp.png',
+                        height:45,
+                        width: 45,
+
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        singleProductVM.product!.temperature.toString(),
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white60,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    width: 10,
+                ),
+
+
+                Positioned(
+                  bottom: 130,
+                  left: 290,
+                  child: Column(
+                    children: [
+
+                      Image.asset(
+                        'assets/icon/pot.png',
+                        height:45,
+                        width: 45,
+
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        singleProductVM.product!.pot.toString(),
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white60,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ],
                   ),
-                  Expanded(
-                      flex: 2,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          CartRepository().addToCart(singleProductVM.product!, quantity).then((value) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Cart updated")));
-                          });
-                        },
-                        child: Text("Add to cart"),
-                      )),
-                ],
-              ),
+                ),
+
+                Positioned(
+                  bottom: 130,
+                  left: 180,
+                  child: Column(
+                    children: [
+
+                      Image.asset(
+                        'assets/icon/height.png',
+                        height:45,
+                        width: 45,
+
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        singleProductVM.product!.height.toString(),
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white60,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                Positioned(
+                  bottom: 25,
+                  left: 30,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Total Price:",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        "Rs. " + singleProductVM.product!.price.toString(),
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.white60,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                Positioned(
+                  bottom: 10,
+                  right: 10,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      CartRepository().addToCart(singleProductVM.product!, 1).then((value) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Cart updated")));
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black54,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      fixedSize: Size(125, 60),
+                    ),
+                    child: Text("Add to cart"),
+                  ),
+                ),
+              ],
             ),
+
             appBar: AppBar(
-              backgroundColor: Colors.black54,
+              backgroundColor: Colors.white,
+              elevation: 0,
+
+              centerTitle: true,
+              iconTheme: IconThemeData(color: Colors.black),
+
               actions: [
                 Builder(builder: (context) {
                   FavoriteModel? isFavorite;
@@ -193,57 +261,51 @@ class _SingleProductBodyState extends State<SingleProductBody> {
                       },
                       icon: Icon(
                         Icons.favorite,
-                        color: isFavorite != null ? Colors.red : Colors.white,
-                      ));
+
+                        color: isFavorite != null ? Colors.red : Colors.grey,
+                      )
+                  );
                 })
               ],
             ),
-            backgroundColor: Color(0xFFf5f5f4),
+
+            backgroundColor: Colors.white,
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  Image.network(
-                    singleProductVM.product!.imageUrl.toString(),
-                    height: 400,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Image.network(
+                          singleProductVM.product!.imageUrl.toString(),
+                          height: 300,
+                          width: 500,
+                          fit: BoxFit.contain,
+                        ),
+                        SizedBox(height: 10),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 10),
+                              Text(
+                                singleProductVM.product!.title.toString(),
+                                style: TextStyle(fontSize: 29, fontWeight: FontWeight.w900),
+                              ),
+                              SizedBox(height: 20),
+                              Text(
+                                singleProductVM.product!.description.toString(),
+                                style: TextStyle(
+                                  fontSize: 15,color: Colors.blueGrey
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
 
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                      decoration: BoxDecoration(color: Colors.white70),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Rs. " + singleProductVM.product!.price.toString(),
-                            style: TextStyle(
-                                fontSize: 30,
-                                color: Colors.green,
-                                fontWeight: FontWeight.w900),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            singleProductVM.product!.title.toString(),
-                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            singleProductVM.product!.description.toString(),
-                            style: TextStyle(
-                              fontSize: 22,
-                            ),
-                          ),
-                        ],
-                      )),
                 ],
               ),
             ),
