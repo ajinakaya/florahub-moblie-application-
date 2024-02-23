@@ -216,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget buildProductCards() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 23.0),
       child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
